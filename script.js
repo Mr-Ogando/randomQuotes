@@ -1,10 +1,28 @@
 // Array of quotes
 let apiQuote= [];
+const quoteText= document.getElementById('quote');
+const quoteBtn=document.getElementById('new-quote');
+const twitter=document.getElementById('twitter');
+const authorText= document.getElementById('author');
 // Arrow function generating new quoate 
 const getNewQuoate =()=>{
 const quote=apiQuote[Math.floor(Math.random() * apiQuote.length)];
+// checking if author is not know.
 
-console.log(quote);
+if(!quote.text){
+  authorText.textContent='Unknown';
+}
+else{
+  authorText.textContent=quote.author;
+}
+//Checking quote lenght 
+if(quote.text.length>=50){
+  quoteText.classList.add('long-text');
+}
+else{
+  quoteText.classList.remove('long-text');
+}
+quoteText.textContent=quote.text;
 }
 
 
@@ -18,7 +36,7 @@ async function getQuotes(){
   try {
     const response= await fetch(urlApi);
     apiQuote= await response.json();
-    getNewQuoate();  
+    getNewQuoate(); 
   } catch (error) {
     
   }
@@ -26,3 +44,16 @@ async function getQuotes(){
 
 // Load
 getQuotes();
+
+
+// Making a tweet function 
+function makeTweet() {
+const tweetUrl=`https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+window.open(tweetUrl, '_blank');
+
+}
+
+//Event Lisetners 
+
+quoteBtn.addEventListener('click',getNewQuoate );
+twitter.addEventListener('click', makeTweet );
