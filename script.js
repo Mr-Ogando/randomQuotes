@@ -26,7 +26,7 @@ quoteText.textContent=quote.text;
 }
 
 
-/* http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?
+/* http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json
 /* https://type.fit/api/quotes*/
 
 // ? Get Quotes from Api!
